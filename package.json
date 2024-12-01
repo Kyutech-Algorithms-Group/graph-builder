@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "cytoscape-fcose": "^2.2.0",
     "force-graph": "^1.43.5",
+    "gh-pages": "^6.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-force-graph": "^1.44.4",
@@ -23,11 +24,14 @@
     "styled-components": "^6.1.11",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://kyutech-algorithms-group.github.io/graph-builder/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -r git@github.com:Kyutech-Algorithms-Group/graph-builder.git"
   },
   "eslintConfig": {
     "extends": [
