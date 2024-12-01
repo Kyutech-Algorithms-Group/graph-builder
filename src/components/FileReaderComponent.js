@@ -72,7 +72,7 @@ function FileReaderComponent({ onFileDataProcessed }) {
                     <option key={index} value={file}>{file}</option>
                 ))}
             </select>
-            {/* <pre>{fileContent}</pre> */}
+            <pre>{fileContent}</pre>
         </div>
     );
 }
