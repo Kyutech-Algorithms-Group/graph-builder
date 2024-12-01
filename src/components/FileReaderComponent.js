@@ -72,6 +72,7 @@ function FileReaderComponent({ onFileDataProcessed }) {
                     <option key={index} value={file}>{file}</option>
                 ))}
             </select>
+            {/* 以下がデバッグ用の表示 */}
             {/* <pre>{fileContent}</pre> */}
         </div>
     );
