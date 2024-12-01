@@ -3,26 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.18",
-    "@mui/joy": "^5.0.0-beta.36",
-    "@mui/material": "^5.15.18",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "@nextui-org/select": "^2.2.2",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.9",
+    "@mui/joy": "^5.0.0-beta.48",
+    "@mui/material": "^6.1.9",
+    "@mui/styled-engine-sc": "^6.1.9",
+    "@nextui-org/select": "^2.2.7",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
     "cytoscape-fcose": "^2.2.0",
-    "force-graph": "^1.43.5",
+    "force-graph": "^1.46.0",
     "gh-pages": "^6.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-force-graph": "^1.44.4",
-    "react-force-graph-2d": "^1.25.5",
+    "react-force-graph": "^1.44.7",
+    "react-force-graph-2d": "^1.25.8",
     "react-scripts": "5.0.1",
-    "styled-components": "^6.1.11",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^6.1.13",
+    "web-vitals": "^4.2.4"
   },
   "homepage": "https://kyutech-algorithms-group.github.io/graph-builder/",
   "scripts": {
@@ -56,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

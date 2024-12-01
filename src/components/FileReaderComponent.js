@@ -55,7 +55,7 @@ function FileReaderComponent({ onFileDataProcessed }) {
         const selectedFileName = event.target.value;
         setSelectedFile(selectedFileName);
         try {
-            const response = await fetch(`/graphillion/${selectedFileName}`);
+            const response = await fetch(`${process.env.PUBLIC_URL}/graphillion/${selectedFileName}`);
             const content = await response.text();
             processFileContent(content);
             setFileContent(content);
