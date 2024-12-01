@@ -1,0 +1,9 @@
+.app {
+  display: flex;
+}
+
+.content {
+  margin-left: 220px; /* サイドバーの幅分のスペースを確保 */
+  padding: 20px;
+  flex: 1;
+}
