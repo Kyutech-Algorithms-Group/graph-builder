@@ -95,13 +95,18 @@ function FileReaderComponent({ onFileDataProcessed, selectedMenu }) {
     }
   };
 
+  const extractNumber = (fileName) => {
+    const match = fileName.match(/\d+/);
+    return match ? match[0] : fileName;
+  };
+
   return (
     <div>
       <select value={selectedFile} onChange={handleFileSelect}>
-        <option value="">ファイルを選択してください</option>
+        <option value="">頂点数を選択してください</option>
         {files.map((file, index) => (
           <option key={index} value={file}>
-            {file}
+            {extractNumber(file)}
           </option>
         ))}
       </select>
