@@ -8,7 +8,7 @@ function FileReaderComponent({ onFileDataProcessed, selectedMenu }) {
 
   // サイドバーの選択に応じてファイルリストを更新
   const getFiles = (sidebar) => {
-    if (sidebar === "bipartite") {
+    if (sidebar === "二部置換グラフ") {
       return Array.from(
         { length: 30 },
         (_, i) => `bipartite${String(i + 1).padStart(3, "0")}.txt`
