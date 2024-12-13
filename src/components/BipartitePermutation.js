@@ -148,6 +148,11 @@ const BipartitePermutation = forwardRef(({ binaryValue }, ref) => {
         for (let j = 0; j < queue0.length; j++) {
           let sourceGroup = nodeGroupMapping[node];
           let targetGroup = nodeGroupMapping[queue0[j]];
+          if (sourceGroup > targetGroup) {
+            let tmp = sourceGroup;
+            sourceGroup = targetGroup;
+            targetGroup = tmp;
+          }
           if (sourceGroup !== targetGroup) {
             let edgeKey = `node${sourceGroup}-node${targetGroup}`;
             let reverseEdgeKey = `node${targetGroup}-node${sourceGroup}`;
