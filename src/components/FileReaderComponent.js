@@ -58,8 +58,10 @@ function FileReaderComponent({ onFileDataProcessed, selectedMenu }) {
       if (parsedEdges0[i] === -1) adjustedEdges0[i] = n + 1;
       if (parsedEdges1[i] === -1) adjustedEdges1[i] = n + 1;
     }
-    let calculatedDp = new Array(n + 1).fill(BigInt(0));
-    calculatedDp[0] = BigInt(1);
+    // let calculatedDp = new Array(n + 1).fill(BigInt(0));
+    let calculatedDp = new Array(n + 1).fill(0);
+    // calculatedDp[0] = BigInt(1);
+    calculatedDp[0] = 1;
     for (let i = 0; i < n; i++) {
       if (adjustedEdges0[i] !== n + 1) {
         calculatedDp[parsedNodes[i]] += calculatedDp[adjustedEdges0[i]];
@@ -106,7 +108,8 @@ function FileReaderComponent({ onFileDataProcessed, selectedMenu }) {
         <option value="">頂点数を選択してください</option>
         {files.map((file, index) => (
           <option key={index} value={file}>
-            {extractNumber(file)}
+            {/* {extractNumber(file)} */}
+            {file}
           </option>
         ))}
       </select>

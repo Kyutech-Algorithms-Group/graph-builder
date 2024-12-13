@@ -31,6 +31,10 @@ function App() {
     calculatedDp,
     displayDp
   ) => {
+    console.log("parsedNodes", parsedNodes);
+    console.log("parsedLevels", parsedLevels);
+    console.log("parsedEdges0", parsedEdges0);
+    console.log("parsedEdges1", parsedEdges1);
     setNodes(parsedNodes);
     setLevels(parsedLevels);
     setEdges0(parsedEdges0);
@@ -41,13 +45,15 @@ function App() {
 
   const handleGraphTypeChange = (newGraphType) => {
     setGraphType(newGraphType);
-    setBinaryByZdd("");
-    setDisplayDp("");
+    // setBinaryByZdd("");
+    // setDisplayDp("");
     // setSelectedNumber(null);
   };
 
   function chooseBinaryToGraph(number) {
-    let cpnumber = BigInt(number);
+    console.log("number", number);
+    // let cpnumber = BigInt(number);
+    let cpnumber = parseInt(number);
     let s = "";
     for (let i = nodes[nodes.length - 1]; i > 0; ) {
       if (cpnumber <= dp[edges1[i - 1]]) {

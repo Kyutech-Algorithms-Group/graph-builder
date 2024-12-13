@@ -1,5 +1,5 @@
 // components/GraphExporter.js
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import CytoscapeComponent from "./SimpleDrawing.js";
 import "./GraphExporter.css";
@@ -45,7 +45,7 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
       case "Force Drawer":
         return <ForceDrawer binaryValue={binaryValue} ref={cyRef} />;
       case "二部置換グラフ":
-        return <div>二部置換グラフ</div>;
+        return <div>{binaryValue}</div>;
       default:
         return null;
     }
@@ -54,14 +54,14 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
   return (
     <div>
       {renderDrawerComponent()}
-      <Button
+      {/* <Button
         className="graph-export-button"
         variant="outlined"
         onClick={handleExport}
         style={{ backgroundColor: "#a0522d", color: "white" }}
       >
         Export Graph as PNG
-      </Button>
+      </Button> */}
     </div>
   );
 };
