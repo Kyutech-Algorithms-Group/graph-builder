@@ -216,7 +216,7 @@ const BipartitePermutation = forwardRef(({ binaryValue }, ref) => {
       nodeAutoColorBy="color"
       linkColor={() => "#696969"}
       linkDirectionalParticles="value"
-      linkDirectionalParticleWidth={8} // パーティクルの幅を指定
+      linkDirectionalParticleWidth={6} // パーティクルの幅を指定
       linkDirectionalParticleSpeed={0.005}
       nodeRelSize={10}
       onNodeClick={(node) => alert(`Clicked node ${node.id}`)}
@@ -229,7 +229,7 @@ const BipartitePermutation = forwardRef(({ binaryValue }, ref) => {
       nodeCanvasObject={(node, ctx, globalScale) => {
         const label = node.label;
         const fontSize = 24 / globalScale;
-        const nodeSize = 8;
+        const nodeSize = 6;
         ctx.font = `${fontSize}px Sans-Serif`;
         ctx.fillStyle = "#000000";
         ctx.textAlign = "center";
