@@ -10,6 +10,7 @@ import ForceDrawer from "./ForceDrawer.js";
 import GridDrawer from "./GridDrawer.js";
 import GridClique from "./GridClique.js";
 import Straight from "./Straight.js";
+import BipartitePermutation from "./BipartitePermutation.js";
 
 const GraphExporter = ({ binaryValue, drawerType }) => {
   const cyRef = useRef(null);
@@ -45,7 +46,7 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
       case "Force Drawer":
         return <ForceDrawer binaryValue={binaryValue} ref={cyRef} />;
       case "二部置換グラフ":
-        return <div>{binaryValue}</div>;
+        return <BipartitePermutation binaryValue={binaryValue} ref={cyRef} />;
       default:
         return null;
     }
