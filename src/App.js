@@ -16,7 +16,8 @@ function App() {
   const [dp, setDp] = React.useState([]);
   const [displayDp, setDisplayDp] = React.useState("");
   const [binaryByZdd, setBinaryByZdd] = React.useState("");
-  const [graphType, setGraphType] = React.useState("Simple Style");
+  const [graphType, setGraphType] =
+    React.useState("隣接集合が同じ頂点を縦に並べる手法");
   // const [selectedNumber, setSelectedNumber] = React.useState(null);
 
   const handleBinaryInputChange = (newValue) => {
