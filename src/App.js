@@ -46,9 +46,14 @@ function App() {
 
   const handleGraphTypeChange = (newGraphType) => {
     setGraphType(newGraphType);
-    // setBinaryByZdd("");
-    // setDisplayDp("");
-    // setSelectedNumber(null);
+    setBinaryByZdd("");
+    // 以下の初期化で，ノードやエッジの情報をけす
+    setDisplayDp("");
+    setNodes([]);
+    setLevels([]);
+    setEdges0([]);
+    setEdges1([]);
+    setDp([]);
   };
 
   function chooseBinaryToGraph(number) {
