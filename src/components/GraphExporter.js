@@ -31,10 +31,10 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
     switch (drawerType) {
       case "Straight Style":
         return <Straight binaryValue={binaryValue} ref={cyRef} />;
-      case "Simple Style":
-        return <CytoscapeComponent binaryValue={binaryValue} ref={cyRef} />;
-      case "Grid Style":
-        return <GridDrawer binaryValue={binaryValue} ref={cyRef} />;
+      // case "Simple Style":
+      //   return <CytoscapeComponent binaryValue={binaryValue} ref={cyRef} />;
+      // case "Grid Style":
+      //   return <GridDrawer binaryValue={binaryValue} ref={cyRef} />;
       case "Grid Clique Style":
         return <GridClique binaryValue={binaryValue} ref={cyRef} />;
       case "Grid Animation Style":

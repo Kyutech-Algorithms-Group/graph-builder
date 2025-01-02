@@ -4,8 +4,8 @@ import "./Sidebar.css";
 const Sidebar = ({ onTypeClick }) => {
   const types = [
     "Straight Style",
-    "Simple Style",
-    "Grid Style",
+    // "Simple Style",
+    // "Grid Style",
     "Grid Animation Style",
     "Grid Clique Style",
     "Force Drawer",
