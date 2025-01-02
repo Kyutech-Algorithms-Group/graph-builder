@@ -16,7 +16,8 @@ function App() {
   const [dp, setDp] = React.useState([]);
   const [displayDp, setDisplayDp] = React.useState("");
   const [binaryByZdd, setBinaryByZdd] = React.useState("");
-  const [graphType, setGraphType] = React.useState("Simple Style");
+  const [graphType, setGraphType] =
+    React.useState("隣接集合が同じ頂点を縦に並べる手法");
   // const [selectedNumber, setSelectedNumber] = React.useState(null);
 
   const handleBinaryInputChange = (newValue) => {
@@ -45,9 +46,14 @@ function App() {
 
   const handleGraphTypeChange = (newGraphType) => {
     setGraphType(newGraphType);
-    // setBinaryByZdd("");
-    // setDisplayDp("");
-    // setSelectedNumber(null);
+    setBinaryByZdd("");
+    // 以下の初期化で，ノードやエッジの情報をけす
+    setDisplayDp("");
+    setNodes([]);
+    setLevels([]);
+    setEdges0([]);
+    setEdges1([]);
+    setDp([]);
   };
 
   function chooseBinaryToGraph(number) {
