@@ -3,12 +3,12 @@ import "./Sidebar.css";
 
 const Sidebar = ({ onTypeClick }) => {
   const types = [
-    "Straight Style",
-    "Simple Style",
-    "Grid Style",
-    "Grid Animation Style",
-    "Grid Clique Style",
-    "Force Drawer",
+    "隣接集合が同じ頂点を縦に並べる手法",
+    // "Simple Style",
+    // "Grid Style",
+    "隣接集合が同じ頂点を一つの頂点として扱う手法",
+    "頂点順序に応じたアニメーションをつける手法",
+    "力学モデルによるレイアウトの改善",
     "二部置換グラフ",
   ];
   return (

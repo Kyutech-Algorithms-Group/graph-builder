@@ -108,8 +108,8 @@ function FileReaderComponent({ onFileDataProcessed, selectedMenu }) {
         <option value="">頂点数を選択してください</option>
         {files.map((file, index) => (
           <option key={index} value={file}>
-            {/* {extractNumber(file)} */}
-            {file}
+            {extractNumber(file)}
+            {/* {file} */}
           </option>
         ))}
       </select>

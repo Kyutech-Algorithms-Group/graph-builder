@@ -29,21 +29,21 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
 
   const renderDrawerComponent = () => {
     switch (drawerType) {
-      case "Straight Style":
+      case "隣接集合が同じ頂点を縦に並べる手法":
         return <Straight binaryValue={binaryValue} ref={cyRef} />;
-      case "Simple Style":
-        return <CytoscapeComponent binaryValue={binaryValue} ref={cyRef} />;
-      case "Grid Style":
-        return <GridDrawer binaryValue={binaryValue} ref={cyRef} />;
-      case "Grid Clique Style":
+      // case "Simple Style":
+      //   return <CytoscapeComponent binaryValue={binaryValue} ref={cyRef} />;
+      // case "Grid Style":
+      //   return <GridDrawer binaryValue={binaryValue} ref={cyRef} />;
+      case "隣接集合が同じ頂点を一つの頂点として扱う手法":
         return <GridClique binaryValue={binaryValue} ref={cyRef} />;
-      case "Grid Animation Style":
+      case "頂点順序に応じたアニメーションをつける手法":
         return <GraphDrawer3 binaryValue={binaryValue} ref={cyRef} />;
       // case "Force Style":
       //     return <FcoseDrawer binaryValue={binaryValue} ref={cyRef} />;
       // case "Force Clique Style":
       //     return <FcoseCliqueDrawer binaryValue={binaryValue} ref={cyRef} />;
-      case "Force Drawer":
+      case "力学モデルによるレイアウトの改善":
         return <ForceDrawer binaryValue={binaryValue} ref={cyRef} />;
       case "二部置換グラフ":
         return <BipartitePermutation binaryValue={binaryValue} ref={cyRef} />;
