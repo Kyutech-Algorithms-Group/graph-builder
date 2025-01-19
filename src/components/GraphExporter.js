@@ -4,6 +4,7 @@ import "./GraphExporter.css";
 import GraphDrawer3 from "./GraphDrawer3.js";
 import ForceDrawer from "./ForceDrawer.js";
 import GridClique from "./GridClique.js";
+import CytoscapeComponent from "./SimpleDrawing.js";
 import Straight from "./Straight.js";
 import BipartitePermutationTwoLine from "./BipartitePermutationTwoLine.js";
 
@@ -26,8 +27,8 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
     switch (drawerType) {
       case "隣接集合が同じ頂点を縦に並べる手法":
         return <Straight binaryValue={binaryValue} ref={cyRef} />;
-      // case "Simple Style":
-      //   return <CytoscapeComponent binaryValue={binaryValue} ref={cyRef} />;
+      case "Simple Style":
+        return <CytoscapeComponent binaryValue={binaryValue} ref={cyRef} />;
       // case "Grid Style":
       //   return <GridDrawer binaryValue={binaryValue} ref={cyRef} />;
       case "隣接集合が同じ頂点を一つの頂点として扱う手法":
