@@ -1,16 +1,11 @@
 // components/GraphExporter.js
 import React, { useRef, useState } from "react";
-import Button from "@mui/material/Button";
-import CytoscapeComponent from "./SimpleDrawing.js";
 import "./GraphExporter.css";
 import GraphDrawer3 from "./GraphDrawer3.js";
-import FcoseDrawer from "./FcoseDrawer.js";
-import FcoseCliqueDrawer from "./FcoseCliqueDrawer.js";
 import ForceDrawer from "./ForceDrawer.js";
-import GridDrawer from "./GridDrawer.js";
 import GridClique from "./GridClique.js";
 import Straight from "./Straight.js";
-import BipartitePermutation from "./BipartitePermutation.js";
+import BipartitePermutationTwoLine from "./BipartitePermutationTwoLine.js";
 
 const GraphExporter = ({ binaryValue, drawerType }) => {
   const cyRef = useRef(null);
@@ -46,7 +41,9 @@ const GraphExporter = ({ binaryValue, drawerType }) => {
       case "力学モデルによるレイアウトの改善":
         return <ForceDrawer binaryValue={binaryValue} ref={cyRef} />;
       case "二部置換グラフ":
-        return <BipartitePermutation binaryValue={binaryValue} ref={cyRef} />;
+        return (
+          <BipartitePermutationTwoLine binaryValue={binaryValue} ref={cyRef} />
+        );
       default:
         return null;
     }
