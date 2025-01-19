@@ -72,127 +72,131 @@ const BipartitePermutationTwoLine = forwardRef(({ binaryValue }, ref) => {
 
     let w1 = 1,
       w2 = 1,
-      w = 1,
-      clique_siz = 1,
-      node_id = 0;
+      w = 1;
     let nodePositions = {};
-    for (let i = 1; i < n; i++) {
+    for (let i = 0; i < n; i++) {
       let position;
-      if (arraysEqual(g[i], g[i - 1])) {
-        clique_siz++;
-        nodeGroupMapping[i] = node_id;
-      } else {
-        // ここでどこに頂点を配置するかを決める
-        let node_color;
-        let y_position;
-        if (bv1[node_id] === "1") {
-          node_color = "#191970";
-          y_position = 100;
-          w = w1;
-          w1++;
-        } else {
-          node_color = "#dc143c";
-          y_position = 200;
-          w = w2;
-          w2++;
-        }
-        position = { x: 100 * w, y: y_position };
-        if (clique_siz > 1) {
-          nodes.push({
-            id: `node${node_id}`,
-            label: `${clique_siz}`,
-            x: position.x,
-            y: position.y,
-            color: node_color,
-          });
-          clique_siz = 1;
-          nodePositions[`node${node_id}`] = position;
-        } else {
-          nodes.push({
-            id: `node${node_id}`,
-            label: `${node_id}`,
-            x: position.x,
-            y: position.y,
-            color: node_color,
-          });
-          nodePositions[`node${node_id}`] = position;
-        }
-        nodeGroupMapping[i] = node_id + 1;
-        node_id++;
-        // w++;
-      }
-    }
-    if (clique_siz > 1) {
-      nodes.push({
-        id: `node${node_id}`,
-        label: `${clique_siz}`,
-        x: 100 * w,
-        y: 100,
-        color: "#ff6347",
-      });
-      nodePositions[`node${node_id}`] = { x: 100 * w, y: 100 };
-    } else {
+      // ここでどこに頂点を配置するかを決める
       let node_color;
       let y_position;
-      if (bv1[node_id] === "1") {
+      if (bv1[i] === "1") {
         node_color = "#191970";
         y_position = 100;
+        w = w1;
+        w1++;
       } else {
         node_color = "#dc143c";
         y_position = 200;
+        w = w2;
+        w2++;
       }
+      position = { x: 100 * w, y: y_position };
       nodes.push({
-        id: `node${node_id}`,
-        label: `${node_id}`,
-        x: 100 * w,
-        y: 100,
+        id: `node${i}`,
+        label: `${i}`,
+        x: position.x,
+        y: position.y,
         color: node_color,
       });
-      nodePositions[`node${node_id}`] = { x: 100 * w, y: 100 };
+      nodePositions[`node${i}`] = position;
+      nodeGroupMapping[i] = i;
     }
-
-    let index = [];
-    let queue0 = [];
-    let edge_id = 0;
-    let edgeSet = new Set();
-    for (let i = 0; i < bv1.length; i++) {
-      if (bv1[i] === "1") {
-        index.push(i);
-      } else {
-        queue0.push(i);
-      }
-    }
-    for (let i = 0; i < bv2.length; i++) {
-      if (bv2[i] === "1") {
-        let node = index.shift();
-        for (let j = 0; j < queue0.length; j++) {
-          let sourceGroup = nodeGroupMapping[node];
-          let targetGroup = nodeGroupMapping[queue0[j]];
-          if (sourceGroup > targetGroup) {
-            let tmp = sourceGroup;
-            sourceGroup = targetGroup;
-            targetGroup = tmp;
-          }
-          if (sourceGroup !== targetGroup) {
-            let edgeKey = `node${sourceGroup}-node${targetGroup}`;
-            let reverseEdgeKey = `node${targetGroup}-node${sourceGroup}`;
-            if (!edgeSet.has(edgeKey) && !edgeSet.has(reverseEdgeKey)) {
-              edgeSet.add(edgeKey);
-              edges.push({
-                source: `node${sourceGroup}`,
-                target: `node${targetGroup}`,
-                id: `edge${edge_id++}`,
-                value: 1,
-              });
-            }
-          }
-        }
-      } else {
-        queue0.shift();
-      }
-    }
+    // if (clique_siz > 1) {
+    //   nodes.push({
+    //     id: `node${node_id}`,
+    //     label: `${clique_siz}`,
+    //     x: 100 * w,
+    //     y: 100,
+    //     color: "#ff6347",
+    //   });
+    //   nodePositions[`node${node_id}`] = { x: 100 * w, y: 100 };
+    // } else {
+    //   let node_color;
+    //   let y_position;
+    //   if (bv1[node_id] === "1") {
+    //     node_color = "#191970";
+    //     y_position = 100;
+    //   } else {
+    //     node_color = "#dc143c";
+    //     y_position = 200;
+    //   }
+    //   nodes.push({
+    //     id: `node${node_id}`,
+    //     label: `${node_id}`,
+    //     x: 100 * w,
+    //     y: 100,
+    //     color: node_color,
+    //   });
+    //   nodePositions[`node${node_id}`] = { x: 100 * w, y: 100 };
+    // }
 
     // 辺の処理
+    let que = [];
+    for (
+      let idx1 = 0, idx2 = 0, qidx = 0;
+      idx1 < n && idx2 < n;
+      ++idx1, ++idx2
+    ) {
+      while (idx1 < n && bv1[idx1] === "0") {
+        que.push(idx1);
+        idx1++;
+      }
+      while (idx2 < n && bv2[idx2] === "0") {
+        qidx++;
+        idx2++;
+      }
+      for (let i = qidx; i < que.length; i++) {
+        edges.push({
+          source: `node${idx1}`,
+          target: `node${que[i]}`,
+          id: `edge${idx1}-${que[i]}`,
+          value: 1,
+        });
+      }
+    }
+    // let idx1 = 0;
+    // let idx2 = 0;
+
+    // while (idx1 < n && idx2 < n) {
+    //   if (bv1[idx1] === "0") {
+    //     idx1++;
+    //   }
+    //   while (idx2 < n && bv2[idx2] === "1") {
+    //     idx2++;
+    //     queue1.push()
+    //   }
+    // }
+
+    // for (let i = 0; i < n; i++) {
+    //   if (bv1[i] === "1") {
+    //     queue1.push(i);
+    //   }
+    // }
+    // for (let i = 0; i < n; i++) {
+    //   for (let j = i + 1; j < n; j++) {
+    //     if (bv1[i] === "1") {
+    //       index++;
+    //       continue;
+    //     }
+    //     if (bv1[i] === "0" && bv2[j] === "0") {
+    //       // queue1の中にある頂点と結ぶ
+    //       let cnt = 0;
+    //       for (let k = 0; k < queue1.length && k < index; k++) {
+    //         edges.push({
+    //           source: `node${i}`,
+    //           target: `node${queue1[k]}`,
+    //           id: `edge${i}-${queue1[k]}`,
+    //           value: 1,
+    //         });
+    //         queue1.shift();
+    //         cnt++;
+    //       }
+    //       index -= cnt;
+    //     } else {
+    //       queue1.push(j);
+    //     }
+    //   }
+    // }
     // idx = 0;
     // let edge_id = 0;
     // let edgeSet = new Set();
