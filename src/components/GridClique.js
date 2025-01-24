@@ -257,11 +257,19 @@ const GridClique = forwardRef(({ binaryValue }, ref) => {
 
     function edgesIntersect(s1, t1, s2, t2) {
       // 交差判定のロジックを実装
-      let s = (s1.x - t1.x) * (s2.y - s1.y) - (s1.y - t1.y) * (s2.x - s1.x);
-      let t = (s1.x - t1.x) * (t2.y - s1.y) - (s1.y - t1.y) * (t2.x - s1.x);
-      let u = (s2.x - t2.x) * (s1.y - s2.y) - (s2.y - t2.y) * (s1.x - s2.x);
-      let v = (s2.x - t2.x) * (t1.y - s2.y) - (s2.y - t2.y) * (t1.x - s2.x);
-      return s * t < 0 && u * v < 0;
+      return (
+        (s1.x < s2.x && s2.x < t1.x && t1.x < t2.x) ||
+        (s1.x === s2.x &&
+          t1.x < t2.x &&
+          t1.x - s1.x > 100 &&
+          t2.x - s2.x > 100) ||
+        (t1.x === t2.x && s1.x < s2.x && t1.x - s1.x > 100 && t2.x - s2.x > 100)
+      );
+      //   let s = (s1.x - t1.x) * (s2.y - s1.y) - (s1.y - t1.y) * (s2.x - s1.x);
+      //   let t = (s1.x - t1.x) * (t2.y - s1.y) - (s1.y - t1.y) * (t2.x - s1.x);
+      //   let u = (s2.x - t2.x) * (s1.y - s2.y) - (s2.y - t2.y) * (s1.x - s2.x);
+      //   let v = (s2.x - t2.x) * (t1.y - s2.y) - (s2.y - t2.y) * (t1.x - s2.x);
+      //   return s * t < 0 && u * v < 0;
     }
 
     function updateIntersectionCount() {
@@ -275,6 +283,8 @@ const GridClique = forwardRef(({ binaryValue }, ref) => {
           const t2 = cy.getElementById(edge2.data.target).position();
           if (edgesIntersect(s1, t1, s2, t2)) {
             intersectionCount++;
+            console.log(`Edge1: ${s1.x} -> ${t1.x}`);
+            console.log(`Edge2: ${s2.x} -> ${t2.x}`);
           }
         });
       });

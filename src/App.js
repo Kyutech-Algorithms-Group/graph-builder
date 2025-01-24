@@ -1,4 +1,3 @@
-// App.js
 import React from "react";
 import "./App.css";
 import Header from "./components/Header.js";
@@ -6,6 +5,8 @@ import Sidebar from "./components/Sidebar.js";
 import GraphExporter from "./components/GraphExporter.js";
 import FileReaderComponent from "./components/FileReaderComponent.js";
 import NumberSelector from "./components/NumberSelector.js";
+import calculateEdgeIntersections from "./utils/CalculateEdgeIntersections";
+import calculateEdgeIntersectionsClique from "./utils/CalculateEdgeIntersectionsClique.js";
 
 function App() {
   const [binaryValue, setBinaryValue] = React.useState("");
@@ -18,7 +19,6 @@ function App() {
   const [binaryByZdd, setBinaryByZdd] = React.useState("");
   const [graphType, setGraphType] =
     React.useState("隣接集合が同じ頂点を縦に並べる手法");
-  // const [selectedNumber, setSelectedNumber] = React.useState(null);
 
   const handleBinaryInputChange = (newValue) => {
     setBinaryValue(newValue);
@@ -47,7 +47,6 @@ function App() {
   const handleGraphTypeChange = (newGraphType) => {
     setGraphType(newGraphType);
     setBinaryByZdd("");
-    // 以下の初期化で，ノードやエッジの情報をけす
     setDisplayDp("");
     setNodes([]);
     setLevels([]);
@@ -58,12 +57,10 @@ function App() {
 
   function chooseBinaryToGraph(number) {
     console.log("number", number);
-    // let cpnumber = BigInt(number);
     let cpnumber = parseInt(number);
     let s = "";
     for (let i = nodes[nodes.length - 1]; i > 0; ) {
       if (cpnumber <= dp[edges1[i - 1]]) {
-        // 自分の実装とgraphillion形式の01が逆なので逆にしている
         s += "0";
         for (
           let j = 0;
@@ -100,14 +97,35 @@ function App() {
       res += s[i];
     }
     setBinaryByZdd(res);
+    return res;
   }
+
+  const exportAllBinaryStrings = () => {
+    const results = [];
+    let sum = 0;
+    for (let i = 1; i <= displayDp; i++) {
+      const binaryString = chooseBinaryToGraph(i);
+      const intersections = calculateEdgeIntersectionsClique(binaryString);
+      // results.push(
+      //   `Number: ${i}, Binary String: ${binaryString}, Intersections: ${intersections}`
+      // );
+      sum += intersections;
+    }
+    results.push(`Avarege Intersections: ${sum / displayDp}`);
+    const blob = new Blob([results.join("\n")], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "clique_intersections13.txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="app">
       <Sidebar onTypeClick={handleGraphTypeChange} />
 
       <div className="content">
-        {/* <Header onChange={handleBinaryInputChange} /> */}
         <FileReaderComponent
           onFileDataProcessed={handleFileData}
           selectedMenu={graphType}
@@ -120,6 +138,9 @@ function App() {
           drawerType={graphType}
         />
         <GraphExporter binaryValue={binaryByZdd} drawerType={graphType} />
+        <button onClick={exportAllBinaryStrings}>
+          Export All Binary Strings
+        </button>
       </div>
     </div>
   );
