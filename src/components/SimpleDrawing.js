@@ -23,7 +23,7 @@ const CytoscapeComponent = forwardRef(({ binaryValue }, ref) => {
         {
           selector: "node",
           style: {
-            "background-color": "#666",
+            "background-color": "#4169e1",
             // label: "data(id)",
             width: "20px",
             height: "20px",
@@ -32,8 +32,8 @@ const CytoscapeComponent = forwardRef(({ binaryValue }, ref) => {
         {
           selector: "edge",
           style: {
-            width: 1,
-            "line-color": "#999999",
+            width: 1.5,
+            "line-color": "#696969",
           },
         },
         {
