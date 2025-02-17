@@ -7,6 +7,7 @@ import FileReaderComponent from "./components/FileReaderComponent.js";
 import NumberSelector from "./components/NumberSelector.js";
 import calculateEdgeIntersections from "./utils/CalculateEdgeIntersections";
 import calculateEdgeIntersectionsClique from "./utils/CalculateEdgeIntersectionsClique.js";
+import ForceDrawer from "./components/ForceDrawer.js";
 
 function App() {
   const [binaryValue, setBinaryValue] = React.useState("");
@@ -19,6 +20,7 @@ function App() {
   const [binaryByZdd, setBinaryByZdd] = React.useState("");
   const [graphType, setGraphType] =
     React.useState("隣接集合が同じ頂点を縦に並べる手法");
+  const forceDrawerRef = React.useRef(null);
 
   const handleBinaryInputChange = (newValue) => {
     setBinaryValue(newValue);
@@ -100,22 +102,42 @@ function App() {
     return res;
   }
 
-  const exportAllBinaryStrings = () => {
+  // const exportAllBinaryStrings = () => {
+  //   const results = [];
+  //   let sum = 0;
+  //   for (let i = 1; i <= displayDp; i++) {
+  //     const binaryString = chooseBinaryToGraph(i);
+  //     const intersections = calculateEdgeIntersectionsClique(binaryString);
+  //     // results.push(
+  //     //   `Number: ${i}, Binary String: ${binaryString}, Intersections: ${intersections}`
+  //     // );
+  //     sum += intersections;
+  //   }
+  //   results.push(`Avarege Intersections: ${sum / displayDp}`);
+  //   const blob = new Blob([results.join("\n")], { type: "text/plain" });
+  //   const link = document.createElement("a");
+  //   link.href = URL.createObjectURL(blob);
+  //   link.download = "clique_intersections13.txt";
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
+
+  const exportAllBinaryStrings = async () => {
     const results = [];
     let sum = 0;
     for (let i = 1; i <= displayDp; i++) {
       const binaryString = chooseBinaryToGraph(i);
-      const intersections = calculateEdgeIntersectionsClique(binaryString);
-      // results.push(
-      //   `Number: ${i}, Binary String: ${binaryString}, Intersections: ${intersections}`
-      // );
+      setBinaryValue(binaryString);
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // 100ms待つ
+      const intersections = forceDrawerRef.current.getIntersectionCount();
       sum += intersections;
     }
-    results.push(`Avarege Intersections: ${sum / displayDp}`);
+    results.push(`Average Intersections: ${sum / displayDp}`);
     const blob = new Blob([results.join("\n")], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "clique_intersections13.txt";
+    link.download = "force_intersections12.txt";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -138,9 +160,10 @@ function App() {
           drawerType={graphType}
         />
         <GraphExporter binaryValue={binaryByZdd} drawerType={graphType} />
-        <button onClick={exportAllBinaryStrings}>
+        {/* <button onClick={exportAllBinaryStrings}>
           Export All Binary Strings
         </button>
+        <ForceDrawer ref={forceDrawerRef} binaryValue={binaryByZdd} /> */}
       </div>
     </div>
   );

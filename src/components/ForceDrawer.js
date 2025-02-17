@@ -18,9 +18,11 @@ function arraysEqual(a, b) {
 const ForceDrawer = forwardRef(({ binaryValue }, ref) => {
   const graphRef = useRef(null);
   const [data, setData] = useState({ nodes: [], links: [] });
+  const [intersectionCount, setIntersectionCount] = useState(0);
 
   useImperativeHandle(ref, () => ({
     png: () => (graphRef.current ? graphRef.current.toPng() : null),
+    getIntersectionCount: () => intersectionCount,
   }));
 
   useEffect(() => {
@@ -151,13 +153,52 @@ const ForceDrawer = forwardRef(({ binaryValue }, ref) => {
     }
 
     setData({ nodes, links: edges });
+    // 力学モデルのシミュレーションを待つ
+    setTimeout(() => {
+      calculateEdgeIntersections();
+    }, 500); // 秒待つ
   }, [binaryValue]);
+
+  const calculateEdgeIntersections = () => {
+    const edges = data.links;
+    function edgesIntersect(s1, t1, s2, t2) {
+      // 交差判定のロジックを実装
+      let s = (s1.x - t1.x) * (s2.y - s1.y) - (s1.y - t1.y) * (s2.x - s1.x);
+      let t = (s1.x - t1.x) * (t2.y - s1.y) - (s1.y - t1.y) * (t2.x - s1.x);
+      let u = (s2.x - t2.x) * (s1.y - s2.y) - (s2.y - t2.y) * (s1.x - s2.x);
+      let v = (s2.x - t2.x) * (t1.y - s2.y) - (s2.y - t2.y) * (t1.x - s2.x);
+      return s * t < 0 && u * v < 0;
+    }
+
+    let intersectionCount = 0;
+
+    edges.forEach((edge1, i) => {
+      const s1 = edge1.source;
+      const t1 = edge1.target;
+      edges.slice(i + 1).forEach((edge2) => {
+        const s2 = edge2.source;
+        const t2 = edge2.target;
+        if (edgesIntersect(s1, t1, s2, t2)) {
+          intersectionCount++;
+        }
+      });
+    });
+
+    setIntersectionCount(intersectionCount);
+    console.log(`Edge Intersections: ${intersectionCount}`);
+  };
 
   const handleNodeDragEnd = (node) => {
     // 全てのノードの座標を取得
     const currentNodes = data.nodes;
     currentNodes.forEach((n) => {
       console.log(`Node ID: ${n.id}, X: ${n.x}, Y: ${n.y}`);
+    });
+    const currentEdges = data.links;
+    currentEdges.forEach((e) => {
+      console.log(
+        `sourcex: ${e.source.x}, sourcey: ${e.source.y}, targetx: ${e.target.x}, targety: ${e.target.y}`
+      );
     });
   };
 
@@ -174,8 +215,8 @@ const ForceDrawer = forwardRef(({ binaryValue }, ref) => {
       nodeRelSize={10}
       onNodeClick={(node) => alert(`Clicked node ${node.id}`)}
       onNodeDragEnd={handleNodeDragEnd} // ノードドラッグ完了時にハンドラーを追加
-      d3AlphaDecay={0.005} // ノードのレイアウト速度を遅くする
-      d3VelocityDecay={0.2} // ノードの移動速度を減衰させる
+      // d3AlphaDecay={0.005} // ノードのレイアウト速度を遅くする
+      // d3VelocityDecay={0.2} // ノードの移動速度を減衰させる
       // d3ForceLayout={(layout) => {
       //     layout.force('charge').strength(-30); // 引力/斥力の強さを調整
       // }}
