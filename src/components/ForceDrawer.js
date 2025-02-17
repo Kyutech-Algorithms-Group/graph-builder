@@ -222,7 +222,7 @@ const ForceDrawer = forwardRef(({ binaryValue }, ref) => {
       // }}
       nodeCanvasObject={(node, ctx, globalScale) => {
         const label = node.label;
-        const fontSize = 24 / globalScale;
+        const fontSize = 32 / globalScale;
         const nodeSize = 8;
         ctx.font = `${fontSize}px Sans-Serif`;
         ctx.fillStyle = "#000000";
