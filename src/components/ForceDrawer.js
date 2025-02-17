@@ -209,6 +209,7 @@ const ForceDrawer = forwardRef(({ binaryValue }, ref) => {
       nodeLabel="label"
       nodeAutoColorBy="color"
       linkColor={() => "#696969"}
+      linkWidth={3}
       linkDirectionalParticles="value"
       linkDirectionalParticleWidth={8} // パーティクルの幅を指定
       linkDirectionalParticleSpeed={0.005}
