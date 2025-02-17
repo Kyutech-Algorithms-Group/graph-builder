@@ -58,7 +58,7 @@ const GridClique = forwardRef(({ binaryValue }, ref) => {
         {
           selector: "edge",
           style: {
-            width: 1,
+            width: 5,
             "line-color": "#696969",
           },
         },
@@ -66,6 +66,7 @@ const GridClique = forwardRef(({ binaryValue }, ref) => {
           selector: "edge.nonSequential",
           style: {
             "curve-style": "unbundled-bezier",
+            "control-point-step-size": 100, // 制御点のステップサイズを設定
           },
         },
       ],
