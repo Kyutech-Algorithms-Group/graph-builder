@@ -49,7 +49,7 @@ const GridClique = forwardRef(({ binaryValue }, ref) => {
             label: "data(label)",
             width: "30px",
             height: "30px",
-            "font-size": "12px",
+            "font-size": "32px",
             "text-valign": "center",
             // 'shape': 'rectangle',
             color: "#000000",
