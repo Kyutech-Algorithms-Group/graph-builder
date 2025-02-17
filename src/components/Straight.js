@@ -27,14 +27,15 @@ const Straight = forwardRef(({ binaryValue }, ref) => {
                     style: {
                         'background-color': '#4169e1',
                         'label': 'data(id)',
-                        'width': '10px',
-                        'height': '10px',
+                        'width': '30px',
+                        'height': '30px',
+                        "font-size": "32px",
                     }
                 },
                 {
                     selector: 'edge',
                     style: {
-                        'width': 1,
+                        'width': 5,
                         'line-color': '#696969',
                     }
                 },
