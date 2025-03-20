@@ -234,7 +234,7 @@ const ForceDrawer = forwardRef(({ binaryValue }, ref) => {
           ctx.beginPath();
           ctx.arc(node.x, node.y, nodeSize, 0, 2 * Math.PI, false); // 赤いノードを描画
           ctx.fill();
-          ctx.fillStyle = "#000000";
+          ctx.fillStyle = "#5AFF19";
           ctx.fillText(label, node.x, node.y); // ラベルをノードに重ねて表示
         } else {
           ctx.fillStyle = node.color;
